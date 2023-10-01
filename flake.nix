@@ -22,7 +22,12 @@
 			];
 
 			perSystem = { pkgs, ... }: {
-				devshells.default = { };
+				devshells.default = {
+					packages = [
+						pkgs.elixir
+						pkgs.elixir-ls
+					];
+				};
 			};
 		};
 }
