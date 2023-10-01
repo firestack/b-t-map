@@ -2,7 +2,10 @@
 	description = "virtual environments";
 
 	inputs.devshell.url = "github:numtide/devshell";
+	inputs.devshell.inputs.nixpkgs.follows = "/nixpkgs";
+
 	inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+	inputs.flake-parts.inputs.nixpkgs-lib.follows = "/nixpkgs";
 
 	outputs = inputs@{ self, flake-parts, devshell, nixpkgs }:
 		flake-parts.lib.mkFlake { inherit inputs; } {
