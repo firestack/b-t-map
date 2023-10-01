@@ -26,6 +26,7 @@
 					packages = [
 						pkgs.elixir
 						pkgs.elixir-ls
+						pkgs.inotify-tools
 					];
 				};
 			};
