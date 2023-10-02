@@ -36,6 +36,9 @@
 					sha256 = "sha256-9cxvP5b2TdxPbu8dW8Tu+xD38p04+6I0ux88re4mzj0=";
 				};
 				devshells.default = {
+					# devshell.startup.link-deps.text = lib.concatStringsSep "\n" [
+					# 	"ln -fsT ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
+					# ];
 					packages = [
 						pkgs.elixir
 						pkgs.elixir-ls
