@@ -21,7 +21,10 @@
 				"x86_64-linux"
 			];
 
-			perSystem = { pkgs, lib, self', ... }: let inherit (pkgs.beam.packages.erlang) fetchMixDeps; in {
+			perSystem = { pkgs, lib, self', ... }: let
+				inherit (pkgs.beam.packages.erlang_26) erlang elixir_1_15 elixir-ls fetchMixDeps;
+				elixir = elixir_1_15;
+			in {
 				packages.mixDeps = fetchMixDeps {
 					pname = "mix-deps-btm";
 					src = ./btm;
@@ -40,10 +43,11 @@
 					# 	"ln -fsT ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
 					# ];
 					packages = [
-						pkgs.elixir
-						pkgs.elixir-ls
-						pkgs.inotify-tools
-					];
+						erlang
+						elixir
+						elixir-ls
+						# pkgs.inotify-tools
+					] ++ lib.optionals pkgs.stdenv.isLinux [pkgs.inotify-tools];
 				};
 			};
 		};
