@@ -38,15 +38,20 @@
 					version = "0.0.1";
 					sha256 = "sha256-9cxvP5b2TdxPbu8dW8Tu+xD38p04+6I0ux88re4mzj0=";
 				};
+				packages.default = pkgs.mixRelease {};
+				
 				devshells.default = {
 					# devshell.startup.link-deps.text = lib.concatStringsSep "\n" [
 					# 	"ln -fsT ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
 					# ];
+					# devshell.interactive.link-deps.text = lib.concatStringsSep "\n" [
+					# 	"echo hi"
+					# 	"ln -s ${self'.packages.mixDeps} \${PRJ_ROOT:-}/btm/deps"
+					# ];
 					packages = [
-						erlang
 						elixir
 						elixir-ls
-						# pkgs.inotify-tools
+						pkgs.fswatch
 					] ++ lib.optionals pkgs.stdenv.isLinux [pkgs.inotify-tools];
 				};
 			};

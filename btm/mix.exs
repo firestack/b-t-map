@@ -61,9 +61,21 @@ defmodule Btm.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["esbuild.install --if-missing"],
-      "assets.build": ["esbuild default"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+
+      # "assets.build": ["esbuild default"],
+      # "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      # "assets.setup": ["esbuild.install --if-missing"],
+
+      "assets.build": ["js.copy", "css.copy"],
+      # "assets.build": ["assets.link"],
+
+      "assets.deploy": ["assets.build", "phx.digest"],
+      "assets.setup": ["assets.build"],
+
+      "assets.link": ["cmd ln -fsT ../../assets/ ./priv/static/assets"],
+
+      "js.copy": ["cmd cp -vR ./assets/js/ ./priv/static/assets/"],
+      "css.copy": ["cmd cp -vR ./assets/css/ ./priv/static/assets/"]
     ]
   end
 end

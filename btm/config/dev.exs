@@ -25,7 +25,19 @@ config :btm, BtmWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "BBCxJuaSPgPw19q0VRFEkGB8m9QbYZxiQQE50sZwVqpx6vbAA0szpyWN92T/e0LW",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    sh: [
+      "-c",
+      ~s{echo starting; mix assets.build; fswatch \
+        --event IsFile \
+        --event Updated \
+        --event Created \
+        --event Removed \
+        --event Renamed \
+        --event MovedFrom \
+        --event MovedTo \
+        -rxo \
+        ./assets/ | while read num; do echo $num; mix assets.build; done}
+    ]
   ]
 
 # ## SSL Support
