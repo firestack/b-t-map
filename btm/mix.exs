@@ -40,7 +40,6 @@ defmodule Btm.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19.0"},
       {:floki, ">= 0.30.0", only: :test},
-      {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
@@ -61,21 +60,8 @@ defmodule Btm.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-
-      # "assets.build": ["esbuild default"],
-      # "assets.deploy": ["esbuild default --minify", "phx.digest"],
-      # "assets.setup": ["esbuild.install --if-missing"],
-
-      "assets.build": ["js.copy", "css.copy"],
-      # "assets.build": ["assets.link"],
-
-      "assets.deploy": ["assets.build", "phx.digest"],
-      "assets.setup": ["assets.build"],
-
-      "assets.link": ["cmd ln -fsT ../../assets/ ./priv/static/assets"],
-
-      "js.copy": ["cmd cp -vR ./assets/js/ ./priv/static/assets/"],
-      "css.copy": ["cmd cp -vR ./assets/css/ ./priv/static/assets/"]
+      "assets.build": [],
+      "assets.deploy": ["assets.build", "phx.digest"]
     ]
   end
 end

@@ -21,16 +21,6 @@ config :btm, BtmWeb.Endpoint,
   pubsub_server: Btm.PubSub,
   live_view: [signing_salt: "Oah6bfjE"]
 
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.17.11",
-  default: [
-    args:
-      ~w(js/app.js --format=esm --target=es2020 --outdir=../priv/static/assets),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
