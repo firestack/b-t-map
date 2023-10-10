@@ -1,3 +1,16 @@
-<ml-map>
-	<ml-marker lat={42} long={-71} />
+<ml-map
+  class="container"
+  center_lat={42.361145}
+  center_long={-71.057083}
+  initZoom={10}
+  map-style={"https://api.maptiler.com/maps/streets/style.json?key=#{@maptiler_key}"}
+>
+  <ml-marker lat={42.361145} long={-71.057083} title="center" />
+  <ml-marker lat={42.361145} long={-71.057} title="center2" />
+
+  <ml-source>
+    <%!-- <%= for {:ok, stop} <- @stops do %>
+			<ml-marker lat={stop["stop_lat"]} long={stop["stop_lon"]} title={stop["stop_name"]} stop_id={stop["stop_id"]}/>
+		<% end %> --%>
+  </ml-source>
 </ml-map>
