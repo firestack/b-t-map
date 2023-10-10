@@ -4,6 +4,9 @@ defmodule BtmWeb.PageController do
   def home(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
-    render(conn, :home, layout: false)
+    conn
+    |> assign(:maptiler_key, Application.get_env(:btm, :maptiler_key, nil))
+    |> render(:home, layout: false)
+  end
   end
 end

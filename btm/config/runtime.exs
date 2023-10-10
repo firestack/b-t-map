@@ -16,6 +16,8 @@ import Config
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
+config :btm, maptiler_key: System.get_env("MAPTILER_API_KEY")
+
 if System.get_env("PHX_SERVER") do
   config :btm, BtmWeb.Endpoint, server: true
 end
