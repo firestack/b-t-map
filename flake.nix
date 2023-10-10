@@ -22,7 +22,7 @@
 			];
 
 			perSystem = { pkgs, lib, self', ... }: let
-				inherit (pkgs.beam.packages.erlang_26) erlang elixir_1_15 elixir-ls fetchMixDeps;
+				inherit (pkgs.beam.packages.erlang_24) erlang elixir_1_15 elixir-ls fetchMixDeps;
 				elixir = elixir_1_15;
 			in {
 				packages.mixDeps = fetchMixDeps {
