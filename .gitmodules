@@ -1,0 +1,3 @@
+[submodule "btm/priv/static/assets/vendor/cssremedy"]
+	path = btm/priv/static/assets/vendor/cssremedy
+	url = https://github.com/jensimmons/cssremedy
