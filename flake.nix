@@ -33,17 +33,46 @@
 				};
 				packages.mixDevDeps = fetchMixDeps {
 					pname = "dev-mix-deps-btm";
-					mixEnv="dev";
+					mixEnv="";
 					src = ./btm;
 					version = "0.0.1";
-					sha256 = "sha256-9cxvP5b2TdxPbu8dW8Tu+xD38p04+6I0ux88re4mzj0=";
+					sha256 = "sha256-RiHHMV3os4gh/suuatcJoxBMErbEuTDPHTT4t9rAscU=";
 				};
 				packages.default = pkgs.mixRelease {};
-				
+
+				packages.gtfs = self'.packages.mbta-gtfs;
+				# packages.gtfs = self'.packages.nyc-manhattan-gtfs;
+				packages.mbta-gtfs = pkgs.fetchzip {
+					url = "https://cdn.mbta.com/MBTA_GTFS.zip";
+					stripRoot = false;
+					hash = "sha256-mJhAs/Nim0wse9d07vyhcjW/VKL+6He3cmq45ukUUXM=";
+				};
+
+				packages.denver-rtd-gtfs = pkgs.fetchzip {
+					url = "https://www.rtd-denver.com/files/gtfs/google_transit.zip";
+					stripRoot = false;
+					hash = "sha256-QJjQ4vQp+5JEQe358QTLFUt48uxitz1aJ5yVWzW4kYs=";
+				};
+
+				packages.nyc-bronx-gtfs = pkgs.fetchzip {
+					url = "http://web.mta.info/developers/data/nyct/bus/google_transit_bronx.zip";
+					stripRoot = false;
+					hash = "sha256-J1CCWf8hZ+uf7gXm9ku1AKQwSiDcWsuqakfBL0g+4ls=";
+				};
+
+				packages.nyc-manhattan-gtfs = pkgs.fetchzip {
+					url = "http://web.mta.info/developers/data/nyct/bus/google_transit_manhattan.zip";
+					stripRoot = false;
+					hash = "sha256-d8R59u5rcrHwDROiCB6V9Dwv6CSGAmp9EKJGaWf5HlM=";
+				};
+
 				devshells.default = {
-					# devshell.startup.link-deps.text = lib.concatStringsSep "\n" [
-					# 	"ln -fsT ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
-					# ];
+					devshell.startup.link-deps.text = lib.concatStringsSep "\n" [
+						"ln ${if (pkgs.hostPlatform.isDarwin) then "-fns" else "-fsT"} ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
+					];
+					devshell.startup.link-gtfs.text = lib.concatStringsSep "\n" [
+						"ln ${if (pkgs.hostPlatform.isDarwin) then "-fns" else "-fsT"} ${self'.packages.gtfs} \${PRJ_ROOT:-}/btm/priv/transient/gtfs"
+					];
 					# devshell.interactive.link-deps.text = lib.concatStringsSep "\n" [
 					# 	"echo hi"
 					# 	"ln -s ${self'.packages.mixDeps} \${PRJ_ROOT:-}/btm/deps"
