@@ -11,7 +11,7 @@ class MLMap extends HTMLElement {
 
 
 
-	
+
 	connectedCallback() {
 		const container = this
 
@@ -19,7 +19,7 @@ class MLMap extends HTMLElement {
 		// const container = document.createElement("div")
 		// shadow.appendChild(container)
 		// this.mapElement = container
-		
+
 		const center = this.attributes.center_long && this.attributes.center_lat && [
 			parseFloat(this.attributes.center_long.value),
 			parseFloat(this.attributes.center_lat.value)
@@ -38,7 +38,7 @@ class MLMap extends HTMLElement {
 		this.map.on("load", () => {
 			this.map.addSource('stops', {
 				'type': 'geojson',
-				'data': "/geojson/stops"
+				'data': "/api/stops/geojson"
 			})
 			// Add a symbol layer
 			this.map.addLayer({
@@ -46,8 +46,12 @@ class MLMap extends HTMLElement {
 				'type': 'circle',
 				'source': 'stops',
 				'paint': {
-					'circle-radius': 1.5,
-					'circle-color': '#ffc72c',
+					// 'circle-radius': 12,
+					'circle-radius': 1.2,
+					'circle-color': '#111',
+					// 'circle-color': '#ffc72c',
+					'circle-stroke-color': '#ffc72c',
+					// 'circle-stroke-color': '#222',
 					'circle-stroke-width': 1,
 			  },
 
@@ -63,7 +67,7 @@ class MLMap extends HTMLElement {
 				// 		'text-anchor': 'top'
 				// }
 			});
-		 
+
 
 		})
 
@@ -78,20 +82,20 @@ class MLMarker extends HTMLElement {
 	}
 
 	static observedAttributes = ["lat", "long"];
-	
+
 	connectedCallback() {
 		const center = this.attributes.long && this.attributes.lat && [
 			parseFloat(this.attributes.long.value),
 			parseFloat(this.attributes.lat.value)
 		] || undefined
-		
+
 		console.debug(center)
 		this.marker = new maplibregl.Marker()
 			.setLngLat(center || [12.550343, 55.665957])
 			.addTo(this.parentElement.map);
-		
+
 	}
-	
+
 }
 
 // customElements.define("ml-marker", MLMarker)

@@ -10,15 +10,7 @@ defmodule BtmWeb.PageController do
     |> render(:home, layout: false)
   end
 
-  def stops_geojson(conn, _params) do
-    json(
-      conn,
-      Geo.JSON.encode!(%Geo.MultiPoint{
-        coordinates:
-          Btm.Stops.stops_with_lat_long()
-          |> Stream.map(fn {:ok, stop} -> stop end)
-          |> Stream.map(&{&1["stop_lon"], &1["stop_lat"]})
-      })
-    )
-  end
+	def stops_geojson(conn, _params) do
+		json(conn, Btm.Stops.stops(:geojson, :multipoint))
+	end
 end

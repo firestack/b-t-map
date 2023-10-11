@@ -14,9 +14,9 @@ defmodule BtmWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", BtmWeb do
+  scope "/api", BtmWeb do
     pipe_through [:api]
-    get "/geojson/stops", PageController, :stops_geojson
+    get "/stops/geojson", PageController, :stops_geojson
   end
 
   scope "/", BtmWeb do
