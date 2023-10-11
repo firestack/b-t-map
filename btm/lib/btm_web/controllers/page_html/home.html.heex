@@ -5,12 +5,8 @@
   initZoom={10}
   map-style={"https://api.maptiler.com/maps/streets/style.json?key=#{@maptiler_key}"}
 >
-  <ml-marker lat={42.361145} long={-71.057083} title="center" />
-  <ml-marker lat={42.361145} long={-71.057} title="center2" />
+	<ml-marker lat={42.361145} long={-71.057083} title="center" />
 
-  <ml-source>
-    <%!-- <%= for {:ok, stop} <- @stops do %>
-			<ml-marker lat={stop["stop_lat"]} long={stop["stop_lon"]} title={stop["stop_name"]} stop_id={stop["stop_id"]}/>
-		<% end %> --%>
-  </ml-source>
+	<ml-source id="stops-source" type="geojson" src="/api/stops/geojson"/>
+	<ml-layer id="stops" source="stops-source" />
 </ml-map>
