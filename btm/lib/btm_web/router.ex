@@ -16,7 +16,9 @@ defmodule BtmWeb.Router do
 
   scope "/api", BtmWeb do
     pipe_through [:api]
-    get "/stops/geojson", PageController, :stops_geojson
+    get "/stops/geojson", PageController, :stops_geojson_multipoint
+    get "/stops/geojson/points", PageController, :stops_geojson_points
+    get "/shapes/geojson", PageController, :shapes_geojson
   end
 
   scope "/", BtmWeb do

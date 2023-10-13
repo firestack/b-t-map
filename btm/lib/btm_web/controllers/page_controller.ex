@@ -10,7 +10,15 @@ defmodule BtmWeb.PageController do
     |> render(:home, layout: false)
   end
 
-	def stops_geojson(conn, _params) do
-		json(conn, Btm.Stops.stops(:geojson, :multipoint))
-	end
+  def stops_geojson_multipoint(conn, _params) do
+    json(conn, Btm.Stops.stops(:geojson, :multipoint))
+  end
+
+  def stops_geojson_points(conn, _params) do
+    json(conn, Btm.Stops.stops(:geojson, :points))
+  end
+
+  def shapes_geojson(conn, _params) do
+    json(conn, Geo.JSON.encode!(Btm.Api.Shapes.shapes(:geojson)))
+  end
 end

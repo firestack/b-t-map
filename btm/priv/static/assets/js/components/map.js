@@ -1,4 +1,5 @@
 import maplibreGl from 'https://cdn.skypack.dev/maplibre-gl'
+import { getProperties } from "./properties.js";
 
 function whenLoaded(map, fn) {
 	if (map.loaded()) {
@@ -7,6 +8,7 @@ function whenLoaded(map, fn) {
 		map.on("load", fn)
 	}
 }
+
 
 async function mapLoaded(map) {
 	return await (new Promise((resolve) => whenLoaded(map, resolve)))
@@ -42,8 +44,9 @@ customElements.define("ml-map", MLMap)
 
 class MLSource extends HTMLElement {
 	async connectedCallback() {
-		await mapLoaded(this.closest("ml-map").map)
-		this.parentElement.map.addSource(this.attributes.id.value, {
+		const map = MLMap.getMap(this);
+		await mapLoaded(map)
+		map.addSource(this.attributes.id.value, {
 			'type': this.attributes.type.value,
 			'data': this.attributes.src.value
 		})
@@ -53,21 +56,16 @@ customElements.define("ml-source", MLSource)
 
 class MLLayer extends HTMLElement {
 	async connectedCallback() {
-		await mapLoaded(MLMap.getMap(this))
+		const map = MLMap.getMap(this);
+		await mapLoaded(map)
 
-		this.parentElement.map.addLayer({
+		const paint = getProperties(this.querySelector("ml-layer-paint"))
+		map.addLayer({
 			'id': this.attributes.id.value,
-			'type': 'circle',
+			'type': this.attributes.type.value,
 			'source': this.attributes.source.value,
-			'paint': {
-				// 'circle-radius': 12,
-				'circle-radius': 1.2,
-				'circle-color': '#111',
-				// 'circle-color': '#ffc72c',
-				'circle-stroke-color': '#ffc72c',
-				// 'circle-stroke-color': '#222',
-				'circle-stroke-width': 1,
-			},
+			'layout': getProperties(this.querySelector("ml-layer-layout")),
+			'paint': paint,
 		});
 	}
 }
