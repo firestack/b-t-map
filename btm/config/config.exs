@@ -8,7 +8,6 @@
 import Config
 
 config :btm,
-  # ecto_repos: [Btm.Repo],
   generators: [binary_id: true]
 
 # Configures the endpoint
