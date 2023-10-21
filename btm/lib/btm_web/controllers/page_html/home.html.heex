@@ -6,23 +6,46 @@
   map-style={"https://api.maptiler.com/maps/streets/style.json?key=#{@maptiler_key}"}
 >
   <!-- <ml-marker lat={42.361145} long={-71.057083} title="center" /> -->
-
-  <ml-source id="stops-source" type="geojson" src="/api/stops/geojson" />
-  <ml-layer id="stops" source="stops-source" type="circle" >
-	<ml-layer-paint>
-		<ml-property name="circle-color" value="#00f"></ml-property>
-		<ml-property name="circle-radius" value={3} type="number"></ml-property>
-		<ml-property name="circle-radius" value={2} type="number"></ml-property>
-	</ml-layer-paint>
-  </ml-layer>
-
   <ml-source id="shapes-source" type="geojson" src="/api/shapes/geojson" />
   <ml-layer id="shapes" source="shapes-source" type="line">
     <ml-layer-paint>
-      <ml-property name="line-color" value="#fff"></ml-property>
-      <ml-property name="line-color" value="#ff0"></ml-property>
-      <ml-property name="line-color" value="#f0f"></ml-property>
+      <!-- <ml-property name="line-color" value="#fff"></ml-property>
+		  <ml-property name="line-color" value="#ff0"></ml-property>
+		  <ml-property name="line-color" value="#f0f"></ml-property> -->
+      <ml-property name="line-color" value="#003DA5"></ml-property>
+      <ml-property name="line-width" value={2} type="number"></ml-property>
       <!-- <ml-interpolate-property name="line-width" value=""></ml-interpolate-property> -->
+    </ml-layer-paint>
+  </ml-layer>
+
+  <ml-source id="stops-source" type="geojson" src="/api/stops/geojson" />
+  <ml-layer id="stops" source="stops-source" type="circle">
+    <ml-layer-paint>
+      <ml-property name="circle-color" value="#00f"></ml-property>
+      <ml-property name="circle-color" value="#110f0b"></ml-property>
+      <ml-property name="circle-radius" value={3} type="number"></ml-property>
+      <ml-property name="circle-radius" value={2} type="number"></ml-property>
+
+		<!-- <ml-property name="fill-color">
+			<ol>
+				<li>interpolate</li>
+				<li>
+					<ol>
+						<li>exponential</li>
+						<li>0.5</li>
+					</ol>
+				</li>
+				<li>
+					<ol>
+						<li>zoom</li>
+					</ol>
+				</li>
+				<li>15</li>
+				<li>'#e2714b'</li>
+				<li>22</li>
+				<li>'#eee695'</li>
+			</ol>
+		</ml-property> -->
     </ml-layer-paint>
   </ml-layer>
 </ml-map>
