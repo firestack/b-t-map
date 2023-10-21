@@ -75,6 +75,7 @@
 						"ln ${if (pkgs.hostPlatform.isDarwin) then "-fns" else "-fsT"} ${self'.packages.mixDevDeps} \${PRJ_ROOT:-}/btm/deps"
 					];
 					devshell.startup.link-gtfs.text = lib.concatStringsSep "\n" [
+						"mkdir -p \$(dirname \${PRJ_ROOT:-}/btm/priv/transient/gtfs)"
 						"ln ${if (pkgs.hostPlatform.isDarwin) then "-fns" else "-fsT"} ${self'.packages.gtfs} \${PRJ_ROOT:-}/btm/priv/transient/gtfs"
 					];
 					# devshell.interactive.link-deps.text = lib.concatStringsSep "\n" [
