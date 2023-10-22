@@ -34,10 +34,10 @@ defmodule Btm.MixProject do
     [
       {:csv, "~> 3.2"},
       {:geo, "~> 3.5"},
-      {:phoenix, "~> 1.7.7"},
+      {:phoenix, "~> 1.7.9"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.19.0"},
+      {:phoenix_live_view, "~> 0.20.1"},
       {:floki, ">= 0.30.0", only: :test},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
